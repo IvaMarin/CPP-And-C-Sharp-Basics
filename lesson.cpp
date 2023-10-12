@@ -7,7 +7,7 @@ void fill_array(int *array, int N, int m, int k)
     {
         for (int j = 0; j < k; ++j)
         {
-            array[i * m + j] = N + counter;
+            array[i * k + j] = N + counter;
             counter++;
         }
     }
@@ -19,7 +19,7 @@ void print_array(int *array, int m, int k)
     {
         for (int j = 0; j < k; ++j)
         {
-            std::cout << array[i * m + j] << " ";
+            std::cout << array[i * k + j] << " ";
         }
         std::cout << std::endl;
     }
