@@ -1,6 +1,6 @@
 ﻿namespace C_Sharp_Basics
 {
-    internal class Calculator
+    internal static class Calculator
     {
         public static decimal Add(decimal firstNumber, decimal secondNumber)
         {
@@ -16,15 +16,8 @@
 
         public static decimal Divide(decimal firstNumber, decimal secondNumber)
         {
-            if (secondNumber != 0)
-            {
-                decimal quotient = firstNumber / secondNumber;
-                return quotient;
-            }
-            else
-            {
-                throw new ArgumentException("can't divide by zero");
-            }
+            decimal quotient = firstNumber / secondNumber;
+            return quotient;
         }
 
         public static decimal Multiply(decimal firstNumber, decimal secondNumber)

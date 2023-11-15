@@ -8,7 +8,6 @@
             decimal number;
             while (true)
             {
-
                 numberString = Console.ReadLine();
 
                 if (decimal.TryParse(numberString, out decimal result))
@@ -36,15 +35,14 @@
             Console.WriteLine($"Sum: {Calculator.Add(firstNumber, secondNumber)}");
             Console.WriteLine($"Difference: {Calculator.Subtract(firstNumber, secondNumber)}");
             Console.WriteLine($"Product: {Calculator.Multiply(firstNumber, secondNumber)}");
-            if (secondNumber != 0)
+            try
             {
                 Console.WriteLine($"Quotient: {Calculator.Divide(firstNumber, secondNumber)}");
             }
-            else
+            catch (DivideByZeroException)
             {
                 Console.WriteLine("Can't divide by zero");
             }
-
         }
     }
 }
