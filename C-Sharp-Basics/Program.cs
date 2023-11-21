@@ -2,22 +2,60 @@
 {
     internal class Program
     {
-        public static decimal TryReadNumber()
+        public static float[] TryCreateArray(string errorMessage)
         {
             string? numberString;
-            decimal number;
+            int number;
+            float[] array = Array.Empty<float>();
             while (true)
             {
                 numberString = Console.ReadLine();
 
-                if (decimal.TryParse(numberString, out decimal result))
+                if (int.TryParse(numberString, out int result))
+                {
+                    number = result;
+
+                    if (number < 0)
+                    {
+                        Console.Write(errorMessage);
+                        continue;
+                    }
+
+                    try
+                    {
+                        array = new float[number];
+                        break;
+                    }
+                    catch
+                    {
+                        Console.Write(errorMessage);
+                    }
+                    break;
+                }
+                else
+                {
+                    Console.Write(errorMessage);
+                }
+            }
+            return array;
+        }
+
+        public static float TryReadFloat(string errorMessage)
+        {
+            string? numberString;
+            float number;
+            while (true)
+            {
+                numberString = Console.ReadLine();
+
+                if (float.TryParse(numberString, out float result))
                 {
                     number = result;
                     break;
                 }
                 else
                 {
-                    Console.Write("Enter correct number: ");
+                    Console.Write(errorMessage);
                 }
             }
             return number;
@@ -26,23 +64,25 @@
 
         static void Main(string[] args)
         {
-            Console.Write("Enter first number: ");
-            decimal firstNumber = TryReadNumber();
+            Console.Write("Enter array size: ");
+            float[] array = TryCreateArray("Enter valid array size: ");
 
-            Console.Write("Enter second number: ");
-            decimal secondNumber = TryReadNumber();
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.Write($"array[{i}] = ");
+                float number = TryReadFloat($"Not valid number!\narray[{i}] = ");
+                array[i] = number;
+            }
 
-            Console.WriteLine($"Sum: {Calculator.Add(firstNumber, secondNumber)}");
-            Console.WriteLine($"Difference: {Calculator.Subtract(firstNumber, secondNumber)}");
-            Console.WriteLine($"Product: {Calculator.Multiply(firstNumber, secondNumber)}");
-            try
+            Console.Write("array = {");
+            foreach (float element in array)
             {
-                Console.WriteLine($"Quotient: {Calculator.Divide(firstNumber, secondNumber)}");
+                Console.Write($" {element}");
             }
-            catch (DivideByZeroException)
-            {
-                Console.WriteLine("Can't divide by zero");
-            }
+            Console.WriteLine(" }");
+
+            Console.WriteLine("Press any key to close this window . . .");
+            Console.ReadKey();
         }
     }
 }
